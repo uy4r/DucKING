@@ -13,7 +13,7 @@
   <a href="https://github.com/uy4r/DucKING/releases/latest"><img src="https://img.shields.io/github/v/release/uy4r/DucKING?color=E5232F&label=s%C3%BCr%C3%BCm" alt="Son sürüm"></a>
   <a href="https://github.com/uy4r/DucKING/releases"><img src="https://img.shields.io/github/downloads/uy4r/DucKING/total?color=E5232F&label=indirme" alt="İndirme"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-1f1f23" alt="Windows 10 | 11">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/uy4r/DucKING?color=1f1f23&label=lisans" alt="Lisans"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/lisans-MIT-1f1f23" alt="Lisans: MIT"></a>
 </p>
 
 <p align="center">
