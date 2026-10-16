@@ -1,0 +1,10 @@
+bin/
+obj/
+publish/
+.vs/
+*.user
+artifacts/
+
+# Derleme ve hata ayıklama artıkları
+*.log
+*.old

@@ -1,0 +1,53 @@
+<UserControl x:Class="DucKING.Views.StartupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:DucKING.Core">
+    <DockPanel Margin="36,30,36,0">
+        <Grid DockPanel.Dock="Top" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="{core:Loc startup.title}" Style="{StaticResource PageTitle}" />
+                <TextBlock Style="{StaticResource PageSubtitle}"
+                           Text="{core:Loc startup.subtitle}" />
+                <TextBlock x:Name="CountText" Style="{StaticResource Dim}" Margin="0,10,0,0" Foreground="{StaticResource Accent}" />
+            </StackPanel>
+            <Button Grid.Column="1" Content="{core:Loc common.refresh}" VerticalAlignment="Bottom" Click="Refresh_Click" />
+        </Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
+            <ItemsControl x:Name="List" Margin="0,0,0,24">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,8" Padding="18,11">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="0,0,20,0">
+                                    <WrapPanel>
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource SectionTitle}" FontSize="14" />
+                                        <Border Style="{StaticResource Badge}" Background="{StaticResource Surface2}">
+                                            <TextBlock Text="{Binding Source}" FontSize="11" Foreground="{StaticResource TextDim}" />
+                                        </Border>
+                                        <Border Style="{StaticResource Badge}" Background="{StaticResource WarningSoft}"
+                                                Visibility="{Binding IsImportant, Converter={StaticResource BoolToVis}}"
+                                                ToolTip="{core:Loc startup.importantTip}">
+                                            <TextBlock Text="{core:Loc startup.important}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource Warning}" />
+                                        </Border>
+                                    </WrapPanel>
+                                    <TextBlock Text="{Binding Command}" FontFamily="{StaticResource MonoFont}" FontSize="11.5" Foreground="{StaticResource TextFaint}"
+                                               TextTrimming="CharacterEllipsis" Margin="0,4,0,0" ToolTip="{Binding Command}" />
+                                </StackPanel>
+                                <ToggleButton Grid.Column="1" Style="{StaticResource Switch}" VerticalAlignment="Center"
+                                              IsChecked="{Binding IsEnabled, Mode=TwoWay}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

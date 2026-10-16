@@ -1,0 +1,128 @@
+// DPI presetleri. Exe'ye gömülür; DpiPresets.UpdateUrl doluysa GitHub'daki daha yeni "version" bu oturum için kullanılır.
+// Kurulu preset adına göre değil argümanlarına göre tanınır (FindPreset); bir presetin argümanlarını değiştirirseniz
+// eski hâliyle kurulmuş servisler tanınmaz. "{dir}" kurulumda aracın klasörüyle değiştirilir; yalnızca paketteki
+// files\ klasörüne başvurabilir. İzin verilen seçenekler ve değer biçimleri için bkz. DpiPresets.Validate.
+// "source": presetin nereden alındığı (arayüzde "Kaynak" bağlantısı olarak gösterilir).
+{
+  "schema": 1,
+  "version": 2,
+  "tools": {
+    "goodbyedpi": [
+      {
+        "name": { "tr": "Standart", "en": "Standard", "ru": "Стандартный" },
+        "arguments": "-5 --set-ttl 5 --dns-addr 1.1.1.1 --dns-port 53 --dnsv6-addr 2606:4700:4700::1111 --dnsv6-port 53"
+      },
+      {
+        "name": { "tr": "Alternatif 1", "en": "Alternative 1", "ru": "Альтернативный 1" },
+        "arguments": "--set-ttl 3"
+      },
+      {
+        "name": { "tr": "Alternatif 2", "en": "Alternative 2", "ru": "Альтернативный 2" },
+        "arguments": "-5"
+      },
+      {
+        "name": { "tr": "Alternatif 3", "en": "Alternative 3", "ru": "Альтернативный 3" },
+        "arguments": "--set-ttl 3 --dns-addr 1.1.1.1 --dns-port 53 --dnsv6-addr 2606:4700:4700::1111 --dnsv6-port 53"
+      },
+      {
+        "name": { "tr": "Alternatif 4", "en": "Alternative 4", "ru": "Альтернативный 4" },
+        "arguments": "-9 --dns-addr 1.1.1.1 --dns-port 53 --dnsv6-addr 2606:4700:4700::1111 --dnsv6-port 53"
+      },
+      {
+        "name": { "tr": "Alternatif 5", "en": "Alternative 5", "ru": "Альтернативный 5" },
+        "arguments": "-9"
+      },
+      {
+        "name": { "tr": "Alternatif 6", "en": "Alternative 6", "ru": "Альтернативный 6" },
+        "arguments": "-6 --set-ttl 3"
+      },
+      {
+        "name": { "tr": "Alternatif 7", "en": "Alternative 7", "ru": "Альтернативный 7" },
+        "arguments": "-7 --set-ttl 4"
+      }
+    ],
+    "zapret": [
+      // Türkiye. Discord ses portları (19294-19344, 50000-50100) Flowseal/zapret-discord-youtube general.bat'tan;
+      // eski "443,50000,50100" listesiyle kurulmuş servisler DpiService.FindPreset'te tanınır.
+      {
+        "region": "turkey",
+        "name": "Türk Telekom",
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --dpi-desync=fake --dpi-desync-ttl=4"
+      },
+      {
+        "region": "turkey",
+        "name": { "tr": "Türk Telekom Alternatif", "en": "Türk Telekom (alternative)", "ru": "Türk Telekom (альтернативный)" },
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --dpi-desync=fake --dpi-desync-ttl=3"
+      },
+      {
+        "region": "turkey",
+        "name": "Superonline",
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --dpi-desync=fake --dpi-desync-fooling=md5sig"
+      },
+      {
+        "region": "turkey",
+        "name": { "tr": "Superonline Alternatif", "en": "Superonline (alternative)", "ru": "Superonline (альтернативный)" },
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,50000-50099 --dpi-desync=fake --dpi-desync-fooling=md5sig --dpi-desync-ttl=3"
+      },
+      {
+        "region": "turkey",
+        "name": "Kablonet",
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --dpi-desync=fake --dpi-desync-ttl=4"
+      },
+      {
+        "region": "turkey",
+        "name": "Turkcell Hotspot",
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --dpi-desync=fake --dpi-desync-ttl=1 --dpi-desync-autottl=3"
+      },
+      {
+        "region": "turkey",
+        "name": "Vodafone Hotspot",
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --dpi-desync=multisplit --dpi-desync-split-pos=2"
+      },
+      // Rusya. Hepsinin Discord ses profili (--filter-l7=discord,stun) bol-van'ın service_create.cmd örneğinden,
+      // ses portları Flowseal/zapret-discord-youtube general.bat'tan. "Genel": bol-van'ın resmi Windows örneği
+      // (belgelerde preset_russia.cmd); --wf-raw-part filtreleri yerine port listesi kullanılır.
+      {
+        "region": "russia",
+        "name": { "tr": "Genel (tüm sağlayıcılar)", "en": "General (all ISPs)", "ru": "Общий (все провайдеры)" },
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --filter-tcp=80 --dpi-desync=fake,fakedsplit --dpi-desync-autottl=2 --dpi-desync-fooling=md5sig --new --filter-tcp=443 --hostlist=\"{dir}\\files\\list-youtube.txt\" --dpi-desync=fake,multidisorder --dpi-desync-split-pos=1,midsld --dpi-desync-repeats=11 --dpi-desync-fooling=md5sig --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com --new --filter-tcp=443 --dpi-desync=fake,multidisorder --dpi-desync-split-pos=midsld --dpi-desync-repeats=6 --dpi-desync-fooling=badseq,md5sig --new --filter-l7=quic --hostlist=\"{dir}\\files\\list-youtube.txt\" --dpi-desync=fake --dpi-desync-repeats=11 --dpi-desync-fake-quic=\"{dir}\\files\\quic_initial_www_google_com.bin\" --new --filter-l7=quic --dpi-desync=fake --dpi-desync-repeats=11 --new --filter-l7=discord,stun --dpi-desync=fake",
+        "source": "https://github.com/bol-van/zapret-win-bundle/blob/master/zapret-winws/preset1_example.cmd"
+      },
+      {
+        "region": "russia",
+        "name": { "tr": "Rostelecom", "en": "Rostelecom", "ru": "Ростелеком" },
+        "arguments": "--wf-tcp=80,443 --wf-udp=443,19294-19344,50000-50100 --filter-l7=discord,stun --dpi-desync=fake --new --dpi-desync=fake --dpi-desync-ttl=4 --dpi-desync-fake-tls=0x00000000 --dpi-desync-fake-tls=! --dpi-desync-fake-tls-mod=rnd,rndsni,dupsid",
+        "source": "https://github.com/bol-van/zapret/discussions/200#discussioncomment-14300911"
+      },
+      {
+        "region": "russia",
+        "name": { "tr": "Beeline", "en": "Beeline", "ru": "Билайн" },
+        "arguments": "--wf-tcp=443 --wf-udp=19294-19344,50000-50100 --filter-tcp=443 --dpi-desync=fake,multidisorder --dpi-desync-split-pos=2,midsld --dpi-desync-repeats=11 --dpi-desync-ttl=0 --dpi-desync-fooling=badseq,badsum --dpi-desync-fake-tls=0x00000000 --dpi-desync-fake-tls=! --dpi-desync-fake-tls-mod=rnd,rndsni,dupsid --new --filter-l7=discord,stun --dpi-desync=fake",
+        "source": "https://github.com/bol-van/zapret/discussions/200#discussioncomment-14343440"
+      },
+      {
+        "region": "russia",
+        "name": { "tr": "MGTS", "en": "MGTS", "ru": "МГТС" },
+        "arguments": "--wf-tcp=443 --wf-udp=19294-19344,50000-50100 --filter-tcp=443 --dpi-desync=fake,multisplit --dpi-desync-ttl=2 --orig-ttl=1 --orig-mod-start=s1 --orig-mod-cutoff=d1 --dpi-desync-split-pos=1,midsld --new --filter-l7=discord,stun --dpi-desync=fake",
+        "source": "https://github.com/bol-van/zapret/discussions/200#discussioncomment-17121850"
+      }
+    ],
+    "byedpi": [
+      // Türk Telekom'da (2026-10-16) SNI'ye göre bölen yöntemler (--tlsrec 1+s, --disorder 3+s) yalnızca TLS 1.3'ü
+      // geçiriyor. Discord'un güncelleyicisi TLS 1.2 kullandığı için Discord açılış ekranında takılıyordu;
+      // "--split 2 --disorder 3" TLS 1.2 ve 1.3'ün ikisini de geçiriyor.
+      {
+        "name": { "tr": "Standart", "en": "Standard", "ru": "Стандартный" },
+        "arguments": "--split 2 --disorder 3 --mod-http=h,d --auto=torst --tlsrec 1+s"
+      },
+      {
+        "name": { "tr": "Alternatif 1", "en": "Alternative 1", "ru": "Альтернативный 1" },
+        "arguments": "--split 1 --disorder 3+s --mod-http=h,d --auto=torst --tlsrec 1+s"
+      },
+      {
+        "name": { "tr": "Alternatif 2", "en": "Alternative 2", "ru": "Альтернативный 2" },
+        "arguments": "--disorder 1 --auto=torst --tlsrec 1+s"
+      }
+    ]
+  }
+}

@@ -1,0 +1,194 @@
+<UserControl x:Class="DucKING.Views.GamesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:DucKING.Core">
+    <UserControl.Resources>
+        <!-- Profil düğmesi: uygulanmış profil kırmızı dolgulu görünür -->
+        <Style x:Key="ProfileButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+            <Setter Property="Margin" Value="0,0,8,8" />
+            <Setter Property="Padding" Value="16,8" />
+            <Setter Property="ToolTipService.ShowDuration" Value="30000" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsActive}" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Accent}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource Accent}" />
+                    <Setter Property="Foreground" Value="{StaticResource OnAccent}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="36,24,36,30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="{core:Loc nav.games}" Style="{StaticResource PageTitle}" />
+                    <TextBlock Style="{StaticResource PageSubtitle}"
+                               Text="{core:Loc games.subtitle}" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20,0,0,0">
+                    <TextBlock x:Name="ProfileSource" FontSize="12" Foreground="{StaticResource TextDim}" HorizontalAlignment="Right" />
+                    <Button x:Name="UpdateButton" Content="{core:Loc games.update}" Margin="0,8,0,0" HorizontalAlignment="Right" Click="Update_Click" />
+                </StackPanel>
+            </Grid>
+
+            <TextBlock x:Name="EmptyText" Style="{StaticResource Dim}" Margin="0,24,0,0" Visibility="Collapsed"
+                       Text="{core:Loc games.empty}" />
+            <TextBlock x:Name="LoadingText" Style="{StaticResource Dim}" Margin="0,24,0,0" Text="{core:Loc games.loading}" />
+
+            <ItemsControl x:Name="GameList" Margin="0,20,0,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,10" Padding="20,16" Cursor="Hand"
+                                MouseLeftButtonUp="Card_Click" ToolTip="{core:Loc games.cardTip}">
+                            <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Margin="0,0,24,0">
+                                    <WrapPanel>
+                                        <TextBlock FontFamily="{StaticResource IconFont}" FontSize="11" VerticalAlignment="Center" Margin="0,2,10,0"
+                                                   Foreground="{StaticResource TextDim}" x:Name="Chevron" Text="&#xE76C;" />
+                                        <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                        <Border Style="{StaticResource Badge}" Background="{StaticResource Surface2}">
+                                            <TextBlock Text="{Binding SourceText}" FontSize="11" Foreground="{StaticResource TextDim}" />
+                                        </Border>
+                                        <Border Style="{StaticResource Badge}" Background="{StaticResource AccentSoft}"
+                                                Visibility="{Binding HasActiveProfileText, Converter={StaticResource BoolToVis}}">
+                                            <TextBlock Text="{Binding ActiveProfileText}" FontSize="11" Foreground="{StaticResource Danger}" />
+                                        </Border>
+                                    </WrapPanel>
+                                    <TextBlock Text="{Binding Status}" FontSize="12" Margin="0,5,0,0" TextWrapping="Wrap"
+                                               Foreground="{Binding StatusBrush, Converter={StaticResource ResourceBrush}}" />
+
+                                    <!-- Profil adları dile göre uzayabildiğinden düğmeler sığmayınca alt satıra geçer -->
+                                    <WrapPanel Margin="0,12,0,-8"
+                                               Visibility="{Binding HasProfiles, Converter={StaticResource BoolToVis}}">
+                                        <ItemsControl ItemsSource="{Binding Profiles}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Button Content="{Binding Name}" ToolTip="{Binding Preview}" Style="{StaticResource ProfileButton}"
+                                                            Click="Profile_Click" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <Button Content="{core:Loc games.revert}" Style="{StaticResource LinkButton}" VerticalAlignment="Center"
+                                                Margin="6,0,0,8" Click="Revert_Click"
+                                                Visibility="{Binding HasBackup, Converter={StaticResource BoolToVis}}" />
+                                    </WrapPanel>
+                                </StackPanel>
+
+                                <!-- Oyuna özel Windows ayarları -->
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Width="300"
+                                            Visibility="{Binding HasWindowsSettings, Converter={StaticResource BoolToVis}}">
+                                    <Grid Margin="0,0,0,10" ToolTip="{Binding GpuTweak.Description}">
+                                        <TextBlock Text="{Binding GpuTweak.Title}" FontSize="13" VerticalAlignment="Center" />
+                                        <ToggleButton Style="{StaticResource Switch}" HorizontalAlignment="Right"
+                                                      IsChecked="{Binding GpuTweak.IsOn, Mode=TwoWay}"
+                                                      IsEnabled="{Binding GpuTweak.IsBusy, Converter={StaticResource InverseBool}}"
+                                                      AutomationProperties.Name="{Binding GpuTweak.Title}" />
+                                    </Grid>
+                                    <Grid ToolTip="{Binding FsoTweak.Description}">
+                                        <TextBlock Text="{Binding FsoTweak.Title}" FontSize="13" VerticalAlignment="Center" />
+                                        <ToggleButton Style="{StaticResource Switch}" HorizontalAlignment="Right"
+                                                      IsChecked="{Binding FsoTweak.IsOn, Mode=TwoWay}"
+                                                      IsEnabled="{Binding FsoTweak.IsBusy, Converter={StaticResource InverseBool}}"
+                                                      AutomationProperties.Name="{Binding FsoTweak.Title}" />
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Ayar tablosu: kart açıkken profillerin yapacağı ayarlar -->
+                            <StackPanel Margin="0,16,0,0" Cursor="Arrow"
+                                        Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVis}}">
+                                <TextBlock Style="{StaticResource Dim}" Visibility="{Binding HasSettings, Converter={StaticResource InverseBoolToVis}}"
+                                           Text="{core:Loc games.noSettings}" />
+                                <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="10"
+                                        Visibility="{Binding HasSettings, Converter={StaticResource BoolToVis}}">
+                                    <StackPanel>
+                                        <!-- Başlık satırı -->
+                                        <Grid Background="{StaticResource Surface2}" Height="34">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="2*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{core:Loc games.colSetting}" FontSize="12" Foreground="{StaticResource TextDim}" VerticalAlignment="Center" Margin="14,0" />
+                                            <TextBlock Grid.Column="1" Text="{core:Loc games.colNow}" FontSize="12" Foreground="{StaticResource TextDim}" VerticalAlignment="Center" />
+                                            <ItemsControl Grid.Column="2" ItemsSource="{Binding ProfileNames}" VerticalAlignment="Center">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding}" FontSize="12" Foreground="{StaticResource Text}" FontWeight="SemiBold" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+
+                                        <ItemsControl ItemsSource="{Binding Settings}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Padding="0,7">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="2*" />
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="2*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Text="{Binding Name}" FontSize="13" Margin="14,0" TextTrimming="CharacterEllipsis" />
+                                                            <TextBlock Grid.Column="1" Text="{Binding Current}" FontSize="13" Foreground="{StaticResource TextDim}" />
+                                                            <ItemsControl Grid.Column="2" ItemsSource="{Binding Cells}">
+                                                                <ItemsControl.ItemsPanel>
+                                                                    <ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate>
+                                                                </ItemsControl.ItemsPanel>
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock x:Name="Cell" Text="{Binding Text}" FontSize="13" Foreground="{StaticResource TextFaint}" />
+                                                                        <DataTemplate.Triggers>
+                                                                            <DataTrigger Binding="{Binding Changes}" Value="True">
+                                                                                <Setter TargetName="Cell" Property="Foreground" Value="{StaticResource Danger}" />
+                                                                                <Setter TargetName="Cell" Property="FontWeight" Value="SemiBold" />
+                                                                            </DataTrigger>
+                                                                        </DataTemplate.Triggers>
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </Border>
+                                <TextBlock FontSize="11.5" Foreground="{StaticResource TextFaint}" Margin="2,8,0,0"
+                                           Visibility="{Binding HasSettings, Converter={StaticResource BoolToVis}}">
+                                    <Run Text="{core:Loc games.legendRed}" Foreground="{StaticResource Danger}" /><Run Text="{core:Loc games.legendRest}" />
+                                </TextBlock>
+                            </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                                <Setter TargetName="Chevron" Property="Text" Value="&#xE70D;" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

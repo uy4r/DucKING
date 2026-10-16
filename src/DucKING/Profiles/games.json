@@ -1,0 +1,269 @@
+{
+  "schema": 2,
+  "version": 6,
+  "valueSets": {
+    "on-off": {
+      "0": { "tr": "Kapalı", "en": "Off", "ru": "Выкл." },
+      "1": { "tr": "Açık", "en": "On", "ru": "Вкл." }
+    },
+    "bool": {
+      "False": { "tr": "Kapalı", "en": "Off", "ru": "Выкл." },
+      "True": { "tr": "Açık", "en": "On", "ru": "Вкл." }
+    },
+    "ue-quality": {
+      "0": { "tr": "Düşük", "en": "Low", "ru": "Низкое" },
+      "1": { "tr": "Orta", "en": "Medium", "ru": "Среднее" },
+      "2": { "tr": "Yüksek", "en": "High", "ru": "Высокое" },
+      "3": { "tr": "Epik", "en": "Epic", "ru": "Эпическое" },
+      "4": { "tr": "Sinematik", "en": "Cinematic", "ru": "Кинематографическое" }
+    },
+    "levels": {
+      "0": { "tr": "Çok düşük", "en": "Very low", "ru": "Очень низкое" },
+      "1": { "tr": "Düşük", "en": "Low", "ru": "Низкое" },
+      "2": { "tr": "Orta", "en": "Medium", "ru": "Среднее" },
+      "3": { "tr": "Yüksek", "en": "High", "ru": "Высокое" },
+      "4": { "tr": "Çok yüksek", "en": "Very high", "ru": "Очень высокое" },
+      "5": "Ultra"
+    }
+  },
+  "formatLabels": {
+    "unreal-ini": {
+      "sg.AntiAliasingQuality": {
+        "name": { "tr": "Kenar yumuşatma", "en": "Anti-aliasing", "ru": "Сглаживание" },
+        "set": "ue-quality"
+      },
+      "sg.ViewDistanceQuality": {
+        "name": { "tr": "Görüş mesafesi", "en": "View distance", "ru": "Дальность прорисовки" },
+        "set": "ue-quality"
+      },
+      "sg.ShadowQuality": {
+        "name": { "tr": "Gölgeler", "en": "Shadows", "ru": "Тени" },
+        "set": "ue-quality"
+      },
+      "sg.GlobalIlluminationQuality": {
+        "name": { "tr": "Global aydınlatma", "en": "Global illumination", "ru": "Глобальное освещение" },
+        "set": "ue-quality"
+      },
+      "sg.ReflectionQuality": {
+        "name": { "tr": "Yansımalar", "en": "Reflections", "ru": "Отражения" },
+        "set": "ue-quality"
+      },
+      "sg.PostProcessQuality": {
+        "name": { "tr": "Son işleme efektleri", "en": "Post-processing", "ru": "Постобработка" },
+        "set": "ue-quality"
+      },
+      "sg.TextureQuality": {
+        "name": { "tr": "Dokular", "en": "Textures", "ru": "Текстуры" },
+        "set": "ue-quality"
+      },
+      "sg.EffectsQuality": {
+        "name": { "tr": "Efektler", "en": "Effects", "ru": "Эффекты" },
+        "set": "ue-quality"
+      },
+      "sg.FoliageQuality": {
+        "name": { "tr": "Bitki örtüsü", "en": "Foliage", "ru": "Растительность" },
+        "set": "ue-quality"
+      },
+      "sg.ShadingQuality": {
+        "name": { "tr": "Gölgelendirme", "en": "Shading", "ru": "Затенение" },
+        "set": "ue-quality"
+      },
+      "bUseVSync": {
+        "name": { "tr": "Dikey eşitleme (V-Sync)", "en": "Vertical sync (V-Sync)", "ru": "Вертикальная синхронизация" },
+        "set": "bool"
+      }
+    }
+  },
+  "games": [
+    {
+      "id": "cs2",
+      "name": "Counter-Strike 2",
+      "steamAppId": 730,
+      "exe": "game/bin/win64/cs2.exe",
+      "process": "cs2",
+      "config": {
+        "format": "cs2-video",
+        "base": "steam-userdata",
+        "path": "*/730/local/cfg/cs2_video.txt"
+      },
+      "labels": {
+        "setting.msaa_samples": {
+          "name": { "tr": "Kenar yumuşatma (MSAA)", "en": "Anti-aliasing (MSAA)", "ru": "Сглаживание (MSAA)" },
+          "values": {
+            "0": { "tr": "Kapalı", "en": "Off", "ru": "Выкл." },
+            "2": "2x MSAA",
+            "4": "4x MSAA",
+            "8": "8x MSAA"
+          }
+        },
+        "setting.r_csgo_cmaa_enable": {
+          "name": { "tr": "CMAA2 kenar yumuşatma", "en": "CMAA2 anti-aliasing", "ru": "Сглаживание CMAA2" },
+          "set": "on-off"
+        },
+        "setting.shaderquality": {
+          "name": { "tr": "Gölgelendirici detayı", "en": "Shader detail", "ru": "Детализация шейдеров" },
+          "values": {
+            "0": { "tr": "Düşük", "en": "Low", "ru": "Низкая" },
+            "1": { "tr": "Yüksek", "en": "High", "ru": "Высокая" }
+          }
+        },
+        "setting.r_texturefilteringquality": {
+          "name": { "tr": "Doku filtreleme", "en": "Texture filtering", "ru": "Фильтрация текстур" },
+          "values": {
+            "0": { "tr": "Bilinear", "en": "Bilinear", "ru": "Билинейная" },
+            "1": { "tr": "Trilinear", "en": "Trilinear", "ru": "Трилинейная" },
+            "2": { "tr": "Anizotropik 2x", "en": "Anisotropic 2x", "ru": "Анизотропная 2x" },
+            "3": { "tr": "Anizotropik 4x", "en": "Anisotropic 4x", "ru": "Анизотропная 4x" },
+            "4": { "tr": "Anizotropik 8x", "en": "Anisotropic 8x", "ru": "Анизотропная 8x" },
+            "5": { "tr": "Anizotropik 16x", "en": "Anisotropic 16x", "ru": "Анизотропная 16x" }
+          }
+        },
+        "setting.videocfg_shadow_quality": {
+          "name": { "tr": "Gölge kalitesi", "en": "Shadow quality", "ru": "Качество теней" },
+          "values": {
+            "0": { "tr": "Düşük", "en": "Low", "ru": "Низкое" },
+            "1": { "tr": "Orta", "en": "Medium", "ru": "Среднее" },
+            "2": { "tr": "Yüksek", "en": "High", "ru": "Высокое" },
+            "3": { "tr": "Çok yüksek", "en": "Very high", "ru": "Очень высокое" }
+          }
+        },
+        "setting.videocfg_dynamic_shadows": {
+          "name": { "tr": "Dinamik gölgeler", "en": "Dynamic shadows", "ru": "Динамические тени" },
+          "values": {
+            "0": { "tr": "Yalnızca güneş", "en": "Sun only", "ru": "Только от солнца" },
+            "1": { "tr": "Tümü", "en": "All", "ru": "Все" }
+          }
+        },
+        "setting.videocfg_texture_detail": {
+          "name": { "tr": "Doku detayı", "en": "Texture detail", "ru": "Детализация текстур" },
+          "values": {
+            "0": { "tr": "Düşük", "en": "Low", "ru": "Низкая" },
+            "1": { "tr": "Orta", "en": "Medium", "ru": "Средняя" },
+            "2": { "tr": "Yüksek", "en": "High", "ru": "Высокая" }
+          }
+        },
+        "setting.videocfg_particle_detail": {
+          "name": { "tr": "Parçacık detayı", "en": "Particle detail", "ru": "Детализация частиц" },
+          "values": {
+            "0": { "tr": "Düşük", "en": "Low", "ru": "Низкая" },
+            "1": { "tr": "Orta", "en": "Medium", "ru": "Средняя" },
+            "2": { "tr": "Yüksek", "en": "High", "ru": "Высокая" },
+            "3": { "tr": "Çok yüksek", "en": "Very high", "ru": "Очень высокая" }
+          }
+        },
+        "setting.videocfg_ao_detail": {
+          "name": { "tr": "Ortam perdelemesi (AO)", "en": "Ambient occlusion", "ru": "Затенение окружения (AO)" },
+          "values": {
+            "0": { "tr": "Kapalı", "en": "Off", "ru": "Выкл." },
+            "1": { "tr": "Orta", "en": "Medium", "ru": "Среднее" },
+            "2": { "tr": "Yüksek", "en": "High", "ru": "Высокое" }
+          }
+        },
+        "setting.videocfg_fsr_detail": {
+          "name": { "tr": "FidelityFX süper çözünürlük", "en": "FidelityFX Super Resolution", "ru": "FidelityFX Super Resolution" },
+          "values": {
+            "0": { "tr": "Kapalı (en yüksek kalite)", "en": "Off (highest quality)", "ru": "Выкл. (наивысшее качество)" }
+          }
+        },
+        "setting.mat_vsync": {
+          "name": { "tr": "Dikey eşitleme (V-Sync)", "en": "Vertical sync (V-Sync)", "ru": "Вертикальная синхронизация" },
+          "set": "on-off"
+        },
+        "setting.aspectratiomode": {
+          "name": { "tr": "En-boy oranı", "en": "Aspect ratio", "ru": "Соотношение сторон" },
+          "values": {
+            "0": "4:3",
+            "1": "16:9",
+            "2": "16:10"
+          }
+        },
+        "setting.defaultres": {
+          "name": { "tr": "Çözünürlük (genişlik)", "en": "Resolution (width)", "ru": "Разрешение (ширина)" }
+        },
+        "setting.defaultresheight": {
+          "name": { "tr": "Çözünürlük (yükseklik)", "en": "Resolution (height)", "ru": "Разрешение (высота)" }
+        },
+        "setting.fullscreen": {
+          "name": { "tr": "Görüntü modu", "en": "Display mode", "ru": "Режим отображения" },
+          "values": {
+            "0": { "tr": "Pencereli", "en": "Windowed", "ru": "В окне" },
+            "1": { "tr": "Tam ekran", "en": "Fullscreen", "ru": "Полный экран" }
+          }
+        },
+        "setting.r_low_latency": {
+          "name": { "tr": "NVIDIA Reflex düşük gecikme", "en": "NVIDIA Reflex Low Latency", "ru": "NVIDIA Reflex (низкая задержка)" },
+          "values": {
+            "0": { "tr": "Kapalı", "en": "Off", "ru": "Выкл." },
+            "1": { "tr": "Açık", "en": "On", "ru": "Вкл." },
+            "2": { "tr": "Açık + Boost", "en": "On + Boost", "ru": "Вкл. + Boost" }
+          }
+        },
+        "setting.videocfg_hdr_detail": {
+          "name": { "tr": "Yüksek dinamik aralık (HDR)", "en": "High dynamic range (HDR)", "ru": "Широкий динамический диапазон (HDR)" },
+          "values": {
+            "3": { "tr": "Kalite", "en": "Quality", "ru": "Качество" },
+            "-1": { "tr": "Performans", "en": "Performance", "ru": "Производительность" }
+          }
+        }
+      },
+      "profiles": [
+        {
+          "id": "competitive-16-9",
+          "name": { "tr": "Rekabetçi 16:9 (1920×1080)", "en": "Competitive 16:9 (1920×1080)", "ru": "Соревновательный 16:9 (1920×1080)" },
+          "description": {
+            "tr": "Rekabetçi ayarlar: 4x MSAA, gölgeler orta ve dinamik gölgeler açık, gölgelendirici yüksek. Orta dokular ve yüksek gölgelendirici, düşmanları fark etmek için önemlidir. Yenileme hızına dokunulmaz.",
+            "en": "Competitive settings: 4x MSAA, medium shadows with dynamic shadows on, high shader detail. Medium textures and high shader detail help you spot enemies. The refresh rate is left untouched.",
+            "ru": "Соревновательные настройки: 4x MSAA, средние тени с динамическими тенями, высокая детализация шейдеров. Средние текстуры и высокие шейдеры помогают замечать противников. Частота обновления не меняется."
+          },
+          "values": {
+            "setting.aspectratiomode": "1",
+            "setting.defaultres": "1920",
+            "setting.defaultresheight": "1080",
+            "setting.fullscreen": "1",
+            "setting.mat_vsync": "0",
+            "setting.r_low_latency": "1",
+            "setting.msaa_samples": "4",
+            "setting.r_csgo_cmaa_enable": "0",
+            "setting.videocfg_shadow_quality": "1",
+            "setting.videocfg_dynamic_shadows": "1",
+            "setting.videocfg_texture_detail": "1",
+            "setting.r_texturefilteringquality": "3",
+            "setting.shaderquality": "1",
+            "setting.videocfg_particle_detail": "1",
+            "setting.videocfg_ao_detail": "1",
+            "setting.videocfg_hdr_detail": "-1",
+            "setting.videocfg_fsr_detail": "0"
+          }
+        },
+        {
+          "id": "competitive-4-3",
+          "name": { "tr": "Rekabetçi 4:3 (1280×1024)", "en": "Competitive 4:3 (1280×1024)", "ru": "Соревновательный 4:3 (1280×1024)" },
+          "description": {
+            "tr": "Rekabetçi ayarlar: 4x MSAA, gölgeler orta ve dinamik gölgeler açık, gölgelendirici yüksek. Orta dokular ve yüksek gölgelendirici, düşmanları fark etmek için önemlidir. Yenileme hızına dokunulmaz.",
+            "en": "Competitive settings: 4x MSAA, medium shadows with dynamic shadows on, high shader detail. Medium textures and high shader detail help you spot enemies. The refresh rate is left untouched.",
+            "ru": "Соревновательные настройки: 4x MSAA, средние тени с динамическими тенями, высокая детализация шейдеров. Средние текстуры и высокие шейдеры помогают замечать противников. Частота обновления не меняется."
+          },
+          "values": {
+            "setting.aspectratiomode": "0",
+            "setting.defaultres": "1280",
+            "setting.defaultresheight": "1024",
+            "setting.fullscreen": "1",
+            "setting.mat_vsync": "0",
+            "setting.r_low_latency": "1",
+            "setting.msaa_samples": "4",
+            "setting.r_csgo_cmaa_enable": "0",
+            "setting.videocfg_shadow_quality": "1",
+            "setting.videocfg_dynamic_shadows": "1",
+            "setting.videocfg_texture_detail": "1",
+            "setting.r_texturefilteringquality": "3",
+            "setting.shaderquality": "1",
+            "setting.videocfg_particle_detail": "1",
+            "setting.videocfg_ao_detail": "1",
+            "setting.videocfg_hdr_detail": "-1",
+            "setting.videocfg_fsr_detail": "0"
+          }
+        }
+      ]
+    }
+  ]
+}

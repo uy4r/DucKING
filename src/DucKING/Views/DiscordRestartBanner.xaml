@@ -1,0 +1,25 @@
+<UserControl x:Class="DucKING.Views.DiscordRestartBanner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:DucKING.Core">
+    <Border CornerRadius="12" Padding="16,12" Background="{StaticResource Surface}"
+            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="&#xE72C;" FontFamily="{StaticResource IconFont}" FontSize="18" Foreground="{StaticResource Danger}"
+                       VerticalAlignment="Center" Margin="0,0,14,0" />
+            <StackPanel Grid.Column="1" Margin="0,0,16,0">
+                <TextBlock Text="{core:Loc discord.title}" FontSize="14" FontWeight="SemiBold" />
+                <TextBlock Style="{StaticResource Dim}" Margin="0,3,0,0"
+                           Text="{core:Loc discord.text}" />
+            </StackPanel>
+            <ToggleButton Grid.Column="2" Style="{StaticResource Switch}" VerticalAlignment="Center"
+                          IsChecked="{Binding RestartDiscord, Mode=TwoWay}"
+                          AutomationProperties.Name="{core:Loc discord.toggle}" />
+        </Grid>
+    </Border>
+</UserControl>

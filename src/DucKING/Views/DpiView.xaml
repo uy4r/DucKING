@@ -1,0 +1,106 @@
+<UserControl x:Class="DucKING.Views.DpiView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DucKING.Views"
+             xmlns:core="clr-namespace:DucKING.Core">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="36,30,44,30">
+            <TextBlock Text="{core:Loc dpi.title}" Style="{StaticResource PageTitle}" />
+            <TextBlock Style="{StaticResource PageSubtitle}"
+                       Text="{core:Loc dpi.subtitle}" />
+
+            <!-- Discord otomatik yeniden başlatma bilgisi -->
+            <local:DiscordRestartBanner Margin="0,18,0,0" />
+
+            <!-- Durum -->
+            <Border Style="{StaticResource Card}" Margin="0,12,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Ellipse x:Name="StatusDot" Width="12" Height="12" Fill="{StaticResource TextFaint}" VerticalAlignment="Center" Margin="0,0,14,0" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock x:Name="StatusTitle" FontSize="17" FontWeight="Bold" />
+                        <TextBlock x:Name="StatusDetail" Style="{StaticResource Dim}" FontFamily="{StaticResource MonoFont}" FontSize="11.5" Margin="0,4,0,0" />
+                    </StackPanel>
+                    <Button Grid.Column="2" x:Name="RemoveButton" Content="{core:Loc common.remove}" Style="{StaticResource DangerButton}"
+                            VerticalAlignment="Center" Click="Remove_Click" />
+                </Grid>
+            </Border>
+
+            <Border x:Name="DnsWarning" Visibility="Collapsed" CornerRadius="12" Padding="18,12" Margin="0,12,0,0"
+                    Background="{StaticResource DangerSoft}" BorderBrush="{StaticResource AccentLine}" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,16,0">
+                        <TextBlock Text="{core:Loc dpi.dnsWarnTitle}" FontWeight="SemiBold" Foreground="{StaticResource Danger}" />
+                        <TextBlock Style="{StaticResource Dim}" Foreground="{StaticResource Text}" Margin="0,4,0,0"
+                                   Text="{core:Loc dpi.dnsWarnText}" />
+                    </StackPanel>
+                    <Button Grid.Column="1" Content="{core:Loc dpi.fixDns}" Style="{StaticResource PrimaryButton}"
+                            VerticalAlignment="Center" Click="FixDns_Click" />
+                </Grid>
+            </Border>
+
+            <TextBlock Text="{core:Loc dpi.step1}" Style="{StaticResource SectionTitle}" Margin="0,26,0,12" />
+            <UniformGrid Columns="3" x:Name="ToolGrid" />
+
+            <TextBlock Text="{core:Loc dpi.step2}" Style="{StaticResource SectionTitle}" Margin="0,24,0,6" />
+            <TextBlock x:Name="PresetHint" Style="{StaticResource Dim}" Margin="0,0,0,10" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="320" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="PresetBox" DisplayMemberPath="Name" SelectionChanged="Preset_Changed" VerticalAlignment="Top">
+                    <!-- Bölge başlıkları (Türkiye / Rusya); yalnızca gruplanmış listede görünür. -->
+                    <ComboBox.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" FontSize="11.5" FontWeight="SemiBold" Foreground="{StaticResource TextDim}" Margin="10,8,10,4" />
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ComboBox.GroupStyle>
+                </ComboBox>
+                <StackPanel Grid.Column="1" Margin="16,10,0,0">
+                    <TextBlock x:Name="PresetArgs" FontFamily="{StaticResource MonoFont}" FontSize="11.5" Foreground="{StaticResource TextFaint}"
+                               TextWrapping="Wrap" />
+                    <!-- Presetin alındığı yer (dpi-presets.json "source"); metni kodda atanır. -->
+                    <Button x:Name="SourceLink" Style="{StaticResource LinkButton}" HorizontalAlignment="Left" Margin="0,4,0,0"
+                            Visibility="Collapsed" Click="SourceLink_Click" />
+                </StackPanel>
+            </Grid>
+            <TextBlock x:Name="RussiaNote" Text="{core:Loc dpi.russiaNote}" Style="{StaticResource Dim}" TextWrapping="Wrap"
+                       Margin="0,10,0,0" Visibility="Collapsed" />
+            <StackPanel Orientation="Horizontal" Margin="0,14,0,0" x:Name="ListPanel">
+                <CheckBox x:Name="ListCheck" IsChecked="True" />
+                <Button x:Name="EditListButton" Content="{core:Loc dpi.editList}" Style="{StaticResource LinkButton}" Margin="14,0,0,0" VerticalAlignment="Center" Click="EditList_Click" />
+            </StackPanel>
+
+            <CheckBox x:Name="DnsFixCheck" IsChecked="True" Margin="0,12,0,0"
+                      Content="{core:Loc dpi.dnsFixCheck}" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,22,0,0">
+                <Button x:Name="InstallButton" Content="{core:Loc dpi.install}" Style="{StaticResource PrimaryButton}" Padding="22,10" Click="Install_Click" />
+                <!-- Metni ve ipucu kodda (Loc.T) atanır. -->
+                <Button x:Name="FindButton" Padding="18,10" Margin="10,0,0,0" Click="Find_Click" />
+                <TextBlock x:Name="BusyText" Text="{core:Loc dpi.installing}" Style="{StaticResource Dim}" VerticalAlignment="Center" Margin="14,0,0,0" Visibility="Collapsed" />
+            </StackPanel>
+
+            <Border CornerRadius="12" Padding="16,12" Margin="0,26,0,0" Background="{StaticResource WarningSoft}">
+                <StackPanel>
+                    <TextBlock Text="{core:Loc dpi.notesTitle}" FontWeight="SemiBold" Foreground="{StaticResource Warning}" />
+                    <TextBlock Style="{StaticResource Dim}" Margin="0,6,0,0" Foreground="{StaticResource Text}"
+                               Text="{core:Loc dpi.notes}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

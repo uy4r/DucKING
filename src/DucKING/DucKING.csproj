@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>DucKING</AssemblyName>
+    <Product>DucKING</Product>
+    <Version>0.4.2</Version>
+    <ApplicationIcon>Assets/ducking.ico</ApplicationIcon>
+    <Description>Oyuncular iÃ§in Ã¼cretsiz Windows DNS, DPI ve performans aracÄ±</Description>
+    <SatelliteResourceLanguages>tr;en;ru</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- dotnet publish: .NET kurulumu gerektirmeyen tek dosya; Tools klasÃ¶rÃ¼ exe'nin iÃ§ine gÃ¶mÃ¼lÃ¼r. -->
+  <PropertyGroup>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.1" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.1" />
+    <Resource Include="Assets/ducking.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Tools\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Oyun listesi exe'ye gÃ¶mÃ¼lÃ¼r; diskte dÃ¼zenlenebilir kopyasÄ± olmaz. -->
+    <EmbeddedResource Include="Profiles\games.json" LogicalName="DucKING.Profiles.games.json" />
+    <EmbeddedResource Include="Profiles\dpi-presets.json" LogicalName="DucKING.Profiles.dpi-presets.json" />
+    <None Include="..\..\licenses\**\*" Link="licenses\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\THIRD_PARTY_NOTICES.md" Link="THIRD_PARTY_NOTICES.md" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

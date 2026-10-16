@@ -1,0 +1,15 @@
+# Metin dosyaları depoda LF tutulur; Windows'ta çalışma kopyasında git ayarına göre CRLF olur.
+* text=auto
+
+# Windows'a özgü betikler her zaman CRLF.
+*.ps1 text eol=crlf
+*.iss text eol=crlf
+*.sln text eol=crlf
+
+# Paketlenen araçlar ve ikili dosyalar olduğu gibi saklanır.
+*.exe binary
+*.dll binary
+*.sys binary
+*.msi binary
+*.ico binary
+*.bin binary
