@@ -13,7 +13,7 @@
   <a href="https://github.com/uy4r/DucKING/releases/latest"><img src="https://img.shields.io/github/v/release/uy4r/DucKING?color=E5232F" alt="Latest release"></a>
   <a href="https://github.com/uy4r/DucKING/releases"><img src="https://img.shields.io/github/downloads/uy4r/DucKING/total?color=E5232F" alt="Downloads"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-1f1f23" alt="Windows 10 | 11">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f1f23" alt="License: MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-1f1f23" alt="License: Apache 2.0"></a>
 </p>
 
 <p align="center">
@@ -143,4 +143,8 @@ DucKING exists thanks to these open-source projects:
 [Windows Packet Filter](https://github.com/wiresock/ndisapi).
 Their licenses and details: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-DucKING's own code is released under the [MIT license](LICENSE). It's free and will stay that way.
+DucKING's own code is released under the [Apache License 2.0](LICENSE). It's free and will stay that way.
+
+If you distribute a project that uses or modifies DucKING, the license requires you to keep the DucKING
+attribution in the [NOTICE](NOTICE) file (project name, owner and link) and to mark the files you
+changed.

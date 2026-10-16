@@ -13,7 +13,7 @@
   <a href="https://github.com/uy4r/DucKING/releases/latest"><img src="https://img.shields.io/github/v/release/uy4r/DucKING?color=E5232F&label=s%C3%BCr%C3%BCm" alt="Son sürüm"></a>
   <a href="https://github.com/uy4r/DucKING/releases"><img src="https://img.shields.io/github/downloads/uy4r/DucKING/total?color=E5232F&label=indirme" alt="İndirme"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-1f1f23" alt="Windows 10 | 11">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/lisans-MIT-1f1f23" alt="Lisans: MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/lisans-Apache%202.0-1f1f23" alt="Lisans: Apache 2.0"></a>
 </p>
 
 <p align="center">
@@ -145,4 +145,8 @@ DucKING şu açık kaynak projeler sayesinde var:
 [Windows Packet Filter](https://github.com/wiresock/ndisapi).
 Lisansları ve ayrıntılar: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-DucKING'in kendi kodu [MIT lisansı](LICENSE) ile dağıtılır. Ücretsizdir ve öyle kalacak.
+DucKING'in kendi kodu [Apache 2.0 lisansı](LICENSE) ile dağıtılır. Ücretsizdir ve öyle kalacak.
+
+DucKING'i kullanan ya da değiştiren bir proje dağıtırsanız lisans gereği [NOTICE](NOTICE) dosyasındaki
+DucKING atfını (proje adı, sahibi ve bağlantısı) korumanız ve değiştirdiğiniz dosyalarda değişiklik
+yaptığınızı belirtmeniz gerekir.
