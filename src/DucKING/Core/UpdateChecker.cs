@@ -22,7 +22,7 @@ public static partial class UpdateChecker
     /// Depo GitHub'a yüklendiğinde buraya "KULLANICI/DucKING" biçiminde depo adı yazılır.
     /// Boşken güncelleme denetimi kapalıdır (Hakkında'daki düğme de gizlenir).
     /// </summary>
-    public const string Repository = "";
+    public const string Repository = "uy4r/DucKING";
 
     public static bool IsEnabled => !string.IsNullOrWhiteSpace(Repository);
 

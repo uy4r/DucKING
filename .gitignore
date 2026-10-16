@@ -8,3 +8,6 @@ artifacts/
 # Derleme ve hata ayıklama artıkları
 *.log
 *.old
+
+# Logo çalışma dosyaları
+design/

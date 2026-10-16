@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -12,7 +12,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>DucKING</AssemblyName>
     <Product>DucKING</Product>
-    <Version>0.4.2</Version>
+    <Version>0.4.3</Version>
     <ApplicationIcon>Assets/ducking.ico</ApplicationIcon>
     <Description>Oyuncular iÃ§in Ã¼cretsiz Windows DNS, DPI ve performans aracÄ±</Description>
     <SatelliteResourceLanguages>tr;en;ru</SatelliteResourceLanguages>

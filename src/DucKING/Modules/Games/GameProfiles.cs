@@ -118,7 +118,7 @@ public static partial class GameProfiles
     /// https://raw.githubusercontent.com/KULLANICI/DucKING/main/src/DucKING/Profiles/games.json
     /// Boşken çevrim içi güncelleme kapalıdır.
     /// </summary>
-    public const string UpdateUrl = "";
+    public const string UpdateUrl = "https://raw.githubusercontent.com/uy4r/DucKING/main/src/DucKING/Profiles/games.json";
 
     /// <summary>2: ad ve değer metinleri dillere göre nesne olabilir (bkz. LocalizedText).</summary>
     public const int SupportedSchema = 2;

@@ -42,7 +42,7 @@ public static partial class DpiPresets
     /// https://raw.githubusercontent.com/KULLANICI/DucKING/main/src/DucKING/Profiles/dpi-presets.json
     /// Boşken çevrim içi güncelleme kapalıdır.
     /// </summary>
-    public const string UpdateUrl = "";
+    public const string UpdateUrl = "https://raw.githubusercontent.com/uy4r/DucKING/main/src/DucKING/Profiles/dpi-presets.json";
 
     public const int SupportedSchema = 1;
     private const string EmbeddedResource = "DucKING.Profiles.dpi-presets.json";
